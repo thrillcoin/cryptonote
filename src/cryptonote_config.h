@@ -31,6 +31,7 @@ static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED
 //TODO Define number of blocks for block size median calculation
 const size_t   CRYPTONOTE_REWARD_BLOCKS_WINDOW               = 100;
 const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE     = 31000; //size of block (bytes) after which reward for block calculated using block size
+const size_t CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V1    = 20000;
 const size_t   CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE        = 600;
 //TODO Define number of digits
 const size_t   CRYPTONOTE_DISPLAY_DECIMAL_POINT              = 8;
@@ -56,6 +57,13 @@ const uint64_t CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_SECONDS    = DIFFICULTY_TARGET
 const uint64_t CRYPTONOTE_MEMPOOL_TX_LIVETIME                = 60 * 60 * 24;     //seconds, one day
 const uint64_t CRYPTONOTE_MEMPOOL_TX_FROM_ALT_BLOCK_LIVETIME = 60 * 60 * 24 * 7; //seconds, one week
 
+const uint64_t UPGRADE_HEIGHT                                = 546602;
+const unsigned UPGRADE_VOTING_THRESHOLD                      = 90; // percent
+const size_t UPGRADE_VOTING_WINDOW                           = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY; // blocks
+const size_t UPGRADE_WINDOW                                  = EXPECTED_NUMBER_OF_BLOCKS_PER_DAY; // blocks
+static_assert(0 < UPGRADE_VOTING_THRESHOLD && UPGRADE_VOTING_THRESHOLD <= 100, "Bad UPGRADE_VOTING_THRESHOLD");
+static_assert(UPGRADE_VOTING_WINDOW > 1, "Bad UPGRADE_VOTING_WINDOW");
+
 const char     CRYPTONOTE_BLOCKS_FILENAME[]                  = "blocks.dat";
 const char     CRYPTONOTE_BLOCKINDEXES_FILENAME[]            = "blockindexes.dat";
 const char     CRYPTONOTE_BLOCKSCACHE_FILENAME[]             = "blockscache.dat";
@@ -69,9 +77,11 @@ const char     CRYPTONOTE_NAME[]                             = "thrill";
 const char     GENESIS_COINBASE_TX_HEX[]                     = "";
 const uint32_t GENESIS_NONCE                                 = 620;
 
-const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
-const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;
-const uint8_t  BLOCK_MINOR_VERSION_0                         =  0;
+const uint8_t CURRENT_TRANSACTION_VERSION                    = 1;
+const uint8_t BLOCK_MAJOR_VERSION_1                          = 1;
+const uint8_t BLOCK_MAJOR_VERSION_2                          = 2;
+const uint8_t BLOCK_MINOR_VERSION_0                          = 0;
+const uint8_t BLOCK_MINOR_VERSION_1                          = 1;
 
 const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by default, blocks ids count in synchronizing
 const size_t   BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  200;    //by default, blocks count in blocks downloading
